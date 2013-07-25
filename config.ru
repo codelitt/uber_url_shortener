@@ -2,6 +2,6 @@ require 'bundler'
 Bundler.require
 
 require './readysetdrop.rb'
-run Sinatra:Application
+run Sinatra::Application
 
 
