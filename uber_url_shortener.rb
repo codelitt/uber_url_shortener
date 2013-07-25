@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'sinatra/activerecord'
-
+require 'alphadecimal'
 #App Files
 require File.join(File.dirname(__FILE__), 'settings.rb') #Database
 
@@ -14,9 +14,12 @@ class ShortenedUrl < ActiveRecord::Base
   def shorten
     self.id.alphadecimal
   end
-end
 
-#Routes
+  def self.find_by_shortened(shortened)
+    find(shortened.alphadecimal)
+  end
+end
+#Routes Controller
 
 get '/' do
   haml :index
@@ -32,7 +35,7 @@ post '/' do
 end
 
 get '/:shortened' do
-  short_url = ShortenedUrl.find(params[:shortened])
+  short_url = ShortenedUrl.find_by_shortened(params[:shortened])
   redirect short_url.url
 end
 
