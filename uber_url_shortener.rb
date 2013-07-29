@@ -66,14 +66,14 @@ class UberUrlShortener < Sinatra::Base
       haml :index
     end
   end
+  
+  get '/about' do
+    haml :about
+  end
 
   get '/:shortened' do
     short_url = ShortenedUrl.find_by_shortened(params[:shortened])
     redirect short_url.url
-  end
-
-  get '/about' do
-    haml :about
   end
 
   run! if app_file == $0
