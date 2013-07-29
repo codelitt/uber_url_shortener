@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem "sinatra", "~> 1.4.3", :require => 'sinatra/base'
+gem "sinatra-activerecord", "~> 1.2.3"
 gem 'thin', '~> 1.5.1' #decide on
 gem 'pg', '~> 0.16.0'
 gem 'alphadecimal', '1.1.2'

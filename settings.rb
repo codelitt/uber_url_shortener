@@ -1,9 +1,9 @@
 configure :development do
-  set :database, 'postgres://codylittlewood@localhost/url_shortener_development'
+  set :database, 'postgres://codelitt@localhost/url_shortener_development'
 end
 
 configure :test do
-  set :database, 'postgres://codylittlewood:@localhost/url_shortener_test'
+  set :database, 'postgres://codelitt:@localhost/url_shortener_test'
 end
 
 #configure :production do

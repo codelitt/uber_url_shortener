@@ -12,20 +12,8 @@
 
 ActiveRecord::Schema.define(version: 20130724130928) do
 
-  create_table "clicks", force: true do |t|
-    t.integer  "short_url_id"
-    t.text     "referrer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "clicks", ["short_url_id"], name: "index_clicks_on_short_url_id", using: :btree
-
-  create_table "short_urls", force: true do |t|
-    t.text     "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "shortened_urls", force: true do |t|
     t.string   "url"
