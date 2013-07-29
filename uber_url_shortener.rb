@@ -56,7 +56,7 @@ class UberUrlShortener < Sinatra::Base
   end
 
 
-  #run! if app_file == $0
+  run! if app_file == $0
 end
 
 #Model. Later could be seperate file
