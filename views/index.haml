@@ -1,6 +1,6 @@
-%form(action="/" method="POST")
+%form(class="mainform" action="/" method="POST")
   %label(for="url")
-  %input(type="text" name="url" id="url")
-  %input(type="submit" value="Shorten")
+  %input(class="enterurl" type="text" name="url" id="url")
+  %input(type="submit" value="Shorten" class="btn btn-primary")
   -if @short_url.present? && !@short_url.valid?
     %p Invalid URL: #{@short_url.url}
