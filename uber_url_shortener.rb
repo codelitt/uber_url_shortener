@@ -1,10 +1,65 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'alphadecimal'
-#App Files
+require 'sinatra/assetpack'
+require 'less'
+require 'haml'
+#App files
 require File.join(File.dirname(__FILE__), 'settings.rb') #Database
 
-#Model. Later could be file
+class UberUrlShortener < Sinatra::Base
+  set :root, File.dirname(__FILE__)
+  #Less.paths << "#{UberUrlShortener.root}/app/css"
+  
+  register Sinatra::AssetPack
+
+  enable :inline_templates
+
+  assets do
+    serve '/js',     from: 'app/js'        # Default
+    serve '/css',    from: 'app/css'       # Default
+    serve '/images', from: 'app/images'    # Default
+    # Add all the paths that Less should look in for @import'ed files
+
+    css :app, '/css/app.css', [
+      # '/css/bootstrap.css', # bootstrap.less
+      '/css/*.css',
+      '/css/*.min.css'
+    ]
+
+    js :app, '/js/app.js', [
+     '/js/*.js'
+    ] 
+
+    css_compression :simple
+    js_compression :jsmin
+  end
+
+  #Routes Controller
+
+  get '/' do
+    haml :index
+  end
+
+  post '/' do
+    @short_url = ShortenedUrl.find_or_create_by_url(params[:url])
+    if @short_url.valid?
+      haml :success
+    else 
+      haml :index
+    end
+  end
+
+  get '/:shortened' do
+    short_url = ShortenedUrl.find_by_shortened(params[:shortened])
+    redirect short_url.url
+  end
+
+
+  #run! if app_file == $0
+end
+
+#Model. Later could be seperate file
 
 class ShortenedUrl < ActiveRecord::Base
   validates_uniqueness_of :url
@@ -19,24 +74,3 @@ class ShortenedUrl < ActiveRecord::Base
     find(shortened.alphadecimal)
   end
 end
-#Routes Controller
-
-get '/' do
-  haml :index
-end
-
-post '/' do
-  @short_url = ShortenedUrl.find_or_create_by_url(params[:url])
-  if @short_url.valid?
-    haml :success
-  else 
-    haml :index
-  end
-end
-
-get '/:shortened' do
-  short_url = ShortenedUrl.find_by_shortened(params[:shortened])
-  redirect short_url.url
-end
-
-

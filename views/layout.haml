@@ -1,3 +1,18 @@
 !!!
 %html
+  %head
+    %meta{:charset => 'utf-8'}
+    %title Uber URL Shortener
+    %meta{:name => 'description', :content => 'URL Shortner for Uber Digital Agency'}
+    %meta{:name => 'author', :content => 'Cody Littlewood'}
+    :plain
+      <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+      <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+
+    /Le styles
+    !=css :app
+    !=js :app
+
   %body= yield
