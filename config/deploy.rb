@@ -9,7 +9,7 @@ set :rvm_ruby_string, :local
 
 #general info
 set :user, 'deploy'
-set :domain, 'url.codelitt.com', 'uber.io', 'www.uber.io'
+set :domain, 'url.codelitt.com'
 set :applicationdir, "/var/www/uber_url_shortener"
 
 set :scm, 'git'
