@@ -11,13 +11,13 @@ set :rvm_ruby_string, :local
 set :user, 'deploy'
 set :domain, 'url.codelitt.com'
 set :applicationdir, "/var/www/uber_url_shortener"
-
 set :scm, 'git'
 set :application, "uber_url_shortener"
-set :repository,  "ssh://git@github.com:codelitt/uber_url_shortener.git"
+set :repository,  "git@github.com:codelitt/uber_url_shortener.git"
 set :branch, 'master'
 set :git_shallow_clone, 1
 set :scm_verbose, true
+set :deploy_via, :remote_cache
 
 role :web, domain                          # Your HTTP server, Apache/etc
 role :app, domain                          # This may be the same as your `Web` server
