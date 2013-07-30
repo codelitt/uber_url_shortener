@@ -10,7 +10,7 @@ gem 'less', '~> 2.3.2'
 gem 'json', '~> 1.8.0'
 gem 'therubyracer', '~> 0.11.4'
 gem 'capistrano', '~> 2.15.5'
-
+gem 'rvm-capistrano', '~> 1.3.4'
 group :development do
   gem 'thin', '~> 1.5.1' #decide on
 end
