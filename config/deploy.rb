@@ -40,7 +40,6 @@ default_run_options[:pty] = true
 
 # After an initial (cold) deploy, symlink the app and restart nginx
 after "deploy:cold" do
-  admin.symlink_config
   admin.nginx_restart
 end
 
