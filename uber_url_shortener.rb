@@ -30,7 +30,7 @@ class UberUrlShortener < Sinatra::Base
   #Less.paths << "#{UberUrlShortener.root}/app/css"
   
   register Sinatra::AssetPack
-
+  
   enable :inline_templates
 
   assets do

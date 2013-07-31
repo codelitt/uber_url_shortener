@@ -5,7 +5,7 @@ require 'bundler/capistrano'
 set :bundle_cmd, "/home/deploy/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 set :bundle_dir, "/home/deploy/.rvm/gems/ruby-2.0.0-p247/gems"
 set :rvm_ruby_string, :local
-
+set :rack_env, :production
 
 #general info
 set :user, 'deploy'
