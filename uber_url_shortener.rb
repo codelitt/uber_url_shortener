@@ -53,14 +53,20 @@ class UberUrlShortener < Sinatra::Base
     js_compression :jsmin
   end
 
-  #Routes Controller
 
+  #Rack authentication
+  use Rack::Auth::Basic, "Restricted Area" do |username, password|
+    [username, password] == ['uber', 'password1']  
+  end
+
+  #Routes Controller
   get '/' do
     haml :index
   end
 
   post '/' do
     @short_url = ShortenedUrl.find_or_create_by_url(params[:url])
+    @base_url = request.base_url
     if @short_url.valid?
       haml :success
     else 
@@ -70,6 +76,10 @@ class UberUrlShortener < Sinatra::Base
   
   get '/about' do
     haml :about
+  end
+
+  get '/favicon.ico' do
+    status 404
   end
 
   get '/:shortened' do
