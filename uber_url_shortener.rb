@@ -55,16 +55,32 @@ class UberUrlShortener < Sinatra::Base
 
 
   #Rack authentication
-  use Rack::Auth::Basic, "Restricted Area" do |username, password|
-    [username, password] == ['uber', 'password1']  
+#  def authorized?
+#    use Rack::Auth::Basic, "Restricted Area" do |username, password|
+#      [username, password] == ['uber', 'password1']  
+#    end
+#  end
+
+  def authorized?
+    @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+    @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ["uber","password1"]
+  end
+
+  def protected!
+    unless authorized?
+      response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+      throw(:halt, [401, "Hold on just a minute there pardner"])
+    end
   end
 
   #Routes Controller
   get '/' do
+    protected! 
     haml :index
   end
 
   post '/' do
+    protected!
     @short_url = ShortenedUrl.find_or_create_by_url(params[:url])
     @base_url = request.base_url
     if @short_url.valid?
@@ -84,7 +100,7 @@ class UberUrlShortener < Sinatra::Base
 
   get '/:shortened' do
     short_url = ShortenedUrl.find_by_shortened(params[:shortened])
-    redirect short_url.url
+    redirect short_url.url, 301
   end
 
   run! if app_file == $0

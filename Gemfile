@@ -14,3 +14,8 @@ gem 'rvm-capistrano', '~> 1.3.4'
 group :development do
   gem 'thin', '~> 1.5.1' #decide on
 end
+
+group :test do
+  gem 'rspec', '~> 2.14.1'
+  gem 'capybara', '~> 2.1.0'
+end
