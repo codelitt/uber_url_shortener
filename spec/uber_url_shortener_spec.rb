@@ -1,7 +1,4 @@
 require 'spec_helper'
-require 'capybara'
-require 'capybara/dsl'
-require 'capybara/rspec'
 
 #def basic_auth(name, password)
 #  if page.driver.respond_to?(:basic_auth)
@@ -16,8 +13,6 @@ require 'capybara/rspec'
 #end
 
 describe "Basic features" do
-  include Capybara::DSL
-  Capybara.app = app
   
   subject { page }
   
@@ -29,10 +24,15 @@ describe "Basic features" do
     last_response.status.should be(200)
   end
 
-  it "should redirect properly" do
-    get '/1'
-    last_response.status.should be(301)
-    last_response.headers["location"].should == ShortenedUrl.find_by_id(1).url
+  it "should shorten url" do
+    shortenedurl = FactoryGirl.create(:shortenedurl)
+    ShortenedUrl.count.should == + 1
   end
-
+  
+  it "should redirect properly" do
+    shortenedurl = FactoryGirl.create(:shortenedurl)
+    get '/2'
+    last_response.status.should be(301)
+    last_response.headers["location"].should == ShortenedUrl.find_by_id(2).url
+  end
 end
