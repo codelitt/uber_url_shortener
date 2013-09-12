@@ -92,7 +92,7 @@ class UberUrlShortener < Sinatra::Base
     protected!
     @short_url = ShortenedUrl.find_or_create_by(:url => params[:url])
     @base_url = request.base_url
-    @show_url = @short_url
+    @show_url = @short_url.id.alphadecimal
     if  @short_url.url.present?
        haml :show
     elsif @short_url.valid?
