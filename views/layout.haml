@@ -17,13 +17,13 @@
 
   %body
     %header
-      .navbar
-        .navbar-inner
-          %a{:class => 'brand', :href => '/'} Uber URL Shortener
-          %ul{:class => 'nav'}
-            %li
-              %a{:href => '/'} Home
-            %li
-              %a{:href => '/about'} About
+      %nav{:class => 'navbar navbar-default', :role => 'navigation'}
+        .nav-header
+          %a{:class => 'navbar-brand', :href => '/'} Uber URL Shortener
+        %ul{:class => 'nav navbar-nav'}
+          %li
+            %a{:href => '/'} Home
+          %li
+            %a{:href => '/about'} About
     .main= yield 
 
