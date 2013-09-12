@@ -5,6 +5,7 @@
     %title Uber URL Shortener
     %meta{:name => 'description', :content => 'URL Shortner for Uber Digital Agency'}
     %meta{:name => 'author', :content => 'Cody Littlewood'}
+    %meta{:name=> 'viewport', :content =>'width=device-width; initial-scale=1.0'}
     :plain
       <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
       <!--[if lt IE 9]>
@@ -13,7 +14,6 @@
 
     /Le styles
     !=css :app
-    !=js :app
 
   %body
     %header
@@ -26,4 +26,5 @@
           %li
             %a{:href => '/about'} About
     .main= yield 
-
+    %script{:src => '//code.jquery.com/jquery.js'}
+    !=js :app

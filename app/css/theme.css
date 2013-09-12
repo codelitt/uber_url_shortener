@@ -6,6 +6,16 @@
 .mainform {
   margin-right: auto;
   margin-left: auto;
+  width: 50%;
+}
+
+#url {
+  width: 400px;
+}
+
+.success {
+  margin-right: auto;
+  margin-left: auto;
   width: 400px;
 }
 
