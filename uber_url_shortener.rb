@@ -12,6 +12,7 @@ require File.join(File.dirname(__FILE__), 'settings.rb') #Database
 #Model. Later could be seperate file
 
 class ShortenedUrl < ActiveRecord::Base
+  before_validation :smart_add_url_protocol 
   validates_uniqueness_of :url
   validates_presence_of :url
   validates_format_of :url, :with => URI::regexp(%w(http))
@@ -22,6 +23,14 @@ class ShortenedUrl < ActiveRecord::Base
 
   def self.find_by_shortened(shortened)
     find(shortened.alphadecimal)
+  end
+
+  protected
+
+  def smart_add_url_protocol
+    unless self.url[/^http:\/\//] || self.url[/^https:\/\//]
+      self.url = 'http://' + self.url
+    end
   end
 end
 
@@ -81,9 +90,12 @@ class UberUrlShortener < Sinatra::Base
 
   post '/' do
     protected!
-    @short_url = ShortenedUrl.find_or_create_by_url(params[:url])
+    @short_url = ShortenedUrl.find_or_create_by(:url => params[:url])
     @base_url = request.base_url
-    if @short_url.valid?
+    @show_url = @short_url
+    if  @short_url.url.present?
+       haml :show
+    elsif @short_url.valid?
       haml :success
     else 
       haml :index

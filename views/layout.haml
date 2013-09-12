@@ -19,12 +19,18 @@
     %header
       %nav{:class => 'navbar navbar-default', :role => 'navigation'}
         .nav-header
+          %button(type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-ex1-collapse')
+            %span{:class => 'sr-only'}
+            %span{:class => 'icon-bar'}       
+            %span{:class => 'icon-bar'}       
+            %span{:class => 'icon-bar'}       
           %a{:class => 'navbar-brand', :href => '/'} Uber URL Shortener
-        %ul{:class => 'nav navbar-nav'}
-          %li
-            %a{:href => '/'} Home
-          %li
-            %a{:href => '/about'} About
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          %ul{:class => 'nav navbar-nav'}
+            %li
+              %a{:href => '/'} Home
+            %li
+              %a{:href => '/about'} About
     .main= yield 
     %script{:src => '//code.jquery.com/jquery.js'}
     !=js :app

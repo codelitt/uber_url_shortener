@@ -1,7 +1,8 @@
-%form(class="mainform form-inline" role="form" action="/" method="POST")
-  .form-group
-    %label(class="sr-only" for="url") Enter URL
-    %input(class="form-control input-lg" placeholder="Enter URL" type="text" name="url" id="url")
-  %input(type="submit" class="btn btn-primary btn-lg" value="Shorten URL")
-  -if @short_url.present? && !@short_url.valid?
-    %p Invalid URL: #{@short_url.url}
+.col-lg-6.col-lg-offset-3
+  %form(class="mainform form-inline" role="form" action="/" method="POST")
+    .form-group
+      %label(class="sr-only" for="url") Enter URL
+      %input(class="form-control input-lg" placeholder="Enter URL" type="text" name="url" id="url")
+    %input(type="submit" class="btn btn-primary btn-lg" value="Shorten URL")
+    -if @short_url.present? && !@short_url.valid?
+      %p Invalid URL: #{@short_url.url}
