@@ -91,7 +91,7 @@ class UberUrlShortener < Sinatra::Base
   post '/' do
     protected!
     #@short_url = ShortenedUrl.find_or_create_by(:url => smart_add_url_protocol(params[:url]))
-    @short_url = ShortenedUrl.find_or_create_by(:url => smart_add_url_protocol(params[:url]))
+    @short_url = ShortenedUrl.find_or_create_by(:url => (params[:url]))
     @base_url = request.base_url
     @show_url = @short_url.id.alphadecimal
     if  @short_url.url.present?
